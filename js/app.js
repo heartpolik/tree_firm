@@ -39,9 +39,12 @@
     });
   }
 
+
+
   // Show the current list of firms by reading them from the database
   function showFirms()
   {
+
     db.allDocs
     (
         {
@@ -64,6 +67,7 @@
   // User pressed the delete button for a todo, delete it
   function deleteButtonPressed(firm) {
     db.remove(firm);
+    clear_input();
   }
 
   // The input box when editing a firm has blurred, we should save
@@ -142,11 +146,11 @@
     checkbox.addEventListener('change', checkboxChanged.bind(this, firm));
 
     var lName = document.createElement('label');
-    lName.appendChild( document.createTextNode(firm.title));
+    lName.appendChild( document.createTextNode('# ' + firm.title));
     lName.addEventListener('dblclick', firmDblClicked.bind(this, firm));
 
     var lCash = document.createElement('label');
-    lCash.appendChild( document.createTextNode(firm.cash));
+    lCash.appendChild( document.createTextNode('$ ' + firm.cash));
     lCash.addEventListener('dblclick', cashDblClicked.bind(this, firm));
 
     var lParent = document.createElement('label');
@@ -161,7 +165,7 @@
     divDisplay.appendChild(checkbox);
     divDisplay.appendChild(lName);
     divDisplay.appendChild(lCash);
-    divDisplay.appendChild(lParent);
+    //divDisplay.appendChild(lParent);
     divDisplay.appendChild(deleteLink);
 
     var inputEditTodo = document.createElement('input');
@@ -197,13 +201,19 @@
     });
   }
 
+  function clear_input()
+  {
+    newOrgNameDom.value = '';
+    newOrgCashDom.value = '';
+    newOrgParentDom.value = '';
+    newParentId.value = '';
+  }
+  
   function newFirmKeyPressHandler() {
     if (newOrgNameDom.value && newOrgCashDom.value){
+      if(!newParentId.value) newParentId.value='NULL';
       addFirm(newOrgNameDom.value, newOrgCashDom.value, newParentId.value);
-        newOrgNameDom.value = '';
-        newOrgCashDom.value = '';
-        newOrgParentDom.value = '';
-        newParentId.value = '';
+      clear_input();
     } else alert("Please, fill empty fields!");
 
   }
