@@ -1,4 +1,10 @@
-pouchdb-getting-started-todo
+ElifTech Briefing task
+
 ============================
 
-The source repository for the getting started tutorial for PouchDB
+http://www.heartpolik.ho.ua/
+
+============================
+re-edited from pouchdb-getting-started-todo
+============================
+
